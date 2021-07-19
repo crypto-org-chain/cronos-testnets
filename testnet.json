@@ -1,0 +1,32 @@
+{
+    "testnet-croeseid-3": {
+      "latest_version": "v0.5.0-rc0",
+      "binary": [
+        {
+          "linux": {
+            "link": "https://github.com/crypto-org-chain/ethermint/releases/download/v0.5.0-rc0/ethermint_0.5.0-rc0_Linux_x86_64.tar.gz",
+            "checksum": "TODO"
+          },
+          "osx": {
+            "link": "https://github.com/crypto-org-chain/ethermint/releases/download/v0.5.0-rc0/ethermint_0.5.0-rc0_Darwin_x86_64.tar.gz",
+            "checksum": "TODO"
+          },
+          "windows": {
+            "link": "https://github.com/crypto-org-chain/ethermint/releases/download/v0.5.0-rc0/ethermint_0.5.0-rc0_Windows_x86_64.zip",
+            "checksum": "TODO"
+          },
+          "version": "v0.5.0-rc0"
+        }
+      ],
+      "seeds": "TODO",
+      "persistent_peers": "TODO",
+      "endpoint": {
+        "tendermint-rpc": "https://cronos-testnet.crypto.org:26657",
+        "lcd": "https://cronos-testnet.crypto.org:1317",
+        "grpc": "https://cronos-testnet.crypto.org:9090",
+        "evm-rpc": "https://cronos-testnet.crypto.org:8545"
+      },
+      "genesis_sha256sum": "1808aef70872b306ba1af51f49b5a3ffde24e3db8c96c51f555930879f25125f",
+      "denom": "basetcro"
+    }
+  }
