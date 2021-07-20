@@ -5,21 +5,21 @@
         {
           "linux": {
             "link": "https://github.com/crypto-org-chain/ethermint/releases/download/v0.5.0-rc0/ethermint_0.5.0-rc0_Linux_x86_64.tar.gz",
-            "checksum": "TODO"
+            "checksum": "a1074b1a213fb4f880b46cc86f6baf819471ba5a2a51d2919f4ac39eb9a09427"
           },
           "osx": {
             "link": "https://github.com/crypto-org-chain/ethermint/releases/download/v0.5.0-rc0/ethermint_0.5.0-rc0_Darwin_x86_64.tar.gz",
-            "checksum": "TODO"
+            "checksum": "c3504f187efcb577019406c89012ab812282c5c01ada0d62aa8f716017272d9d"
           },
           "windows": {
             "link": "https://github.com/crypto-org-chain/ethermint/releases/download/v0.5.0-rc0/ethermint_0.5.0-rc0_Windows_x86_64.zip",
-            "checksum": "TODO"
+            "checksum": "fd02d76f878e342a357dd1cc5ff2bcd675b316b46b86377e0986ece7db0113fe"
           },
           "version": "v0.5.0-rc0"
         }
       ],
       "seeds": "6760167d71f53db880dd6a99e37b17db876697c5@13.213.254.205:26656,81348744600631ed3e60b1983e070ed4f190efc5@18.139.32.246:26656",
-      "persistent_peers": "TODO",
+      "persistent_peers": "6760167d71f53db880dd6a99e37b17db876697c5@13.213.254.205:26656,81348744600631ed3e60b1983e070ed4f190efc5@18.139.32.246:26656",
       "endpoint": {
         "tendermint-rpc": "https://cronos-testnet.crypto.org:26657",
         "lcd": "https://cronos-testnet.crypto.org:1317",
