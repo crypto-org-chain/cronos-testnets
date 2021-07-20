@@ -18,7 +18,7 @@
           "version": "v0.5.0-rc0"
         }
       ],
-      "seeds": "TODO",
+      "seeds": "6760167d71f53db880dd6a99e37b17db876697c5@13.213.254.205:26656,81348744600631ed3e60b1983e070ed4f190efc5@18.139.32.246:26656",
       "persistent_peers": "TODO",
       "endpoint": {
         "tendermint-rpc": "https://cronos-testnet.crypto.org:26657",

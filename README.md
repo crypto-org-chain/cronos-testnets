@@ -8,7 +8,7 @@ To get started with the latest testnet, see the [docs](https://cronos.crypto.org
 
 ## Testnet Status
 
-- July 20_ - `cronostestnet-338`
+- _July 20_ - `cronostestnet-338`
 
 
 [testnet.json](./testnet.json) lists all the existing testnets information.
