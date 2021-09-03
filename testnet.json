@@ -1,32 +1,32 @@
 {
-    "testnet-croeseid-3": {
-      "latest_version": "v0.5.0-rc0",
-      "binary": [
-        {
-          "linux": {
-            "link": "https://github.com/crypto-org-chain/ethermint/releases/download/v0.5.0-rc0/ethermint_0.5.0-rc0_Linux_x86_64.tar.gz",
-            "checksum": "a1074b1a213fb4f880b46cc86f6baf819471ba5a2a51d2919f4ac39eb9a09427"
-          },
-          "osx": {
-            "link": "https://github.com/crypto-org-chain/ethermint/releases/download/v0.5.0-rc0/ethermint_0.5.0-rc0_Darwin_x86_64.tar.gz",
-            "checksum": "c3504f187efcb577019406c89012ab812282c5c01ada0d62aa8f716017272d9d"
-          },
-          "windows": {
-            "link": "https://github.com/crypto-org-chain/ethermint/releases/download/v0.5.0-rc0/ethermint_0.5.0-rc0_Windows_x86_64.zip",
-            "checksum": "fd02d76f878e342a357dd1cc5ff2bcd675b316b46b86377e0986ece7db0113fe"
-          },
-          "version": "v0.5.0-rc0"
-        }
-      ],
-      "seeds": "6760167d71f53db880dd6a99e37b17db876697c5@13.213.254.205:26656,81348744600631ed3e60b1983e070ed4f190efc5@18.139.32.246:26656",
-      "persistent_peers": "6760167d71f53db880dd6a99e37b17db876697c5@13.213.254.205:26656,81348744600631ed3e60b1983e070ed4f190efc5@18.139.32.246:26656",
-      "endpoint": {
-        "tendermint-rpc": "https://cronos-testnet.crypto.org:26657",
-        "lcd": "https://cronos-testnet.crypto.org:1317",
-        "grpc": "https://cronos-testnet.crypto.org:9090",
-        "evm-rpc": "https://cronos-testnet.crypto.org:8545"
-      },
-      "genesis_sha256sum": "1808aef70872b306ba1af51f49b5a3ffde24e3db8c96c51f555930879f25125f",
-      "denom": "basetcro"
-    }
+  "cronostestnet_338-1": {
+    "latest_version": "v0.5.2",
+    "binary": [
+      {
+        "linux": {
+          "link": "https://github.com/crypto-org-chain/cronos/releases/download/v0.5.2/cronos_0.5.2_Linux_x86_64.tar.gz",
+          "checksum": "90e43d6400d49e4ec21f3063c3114e1b4829a61fb3075e555cfaa390dded62f3"
+        },
+        "osx": {
+          "link": "https://github.com/crypto-org-chain/cronos/releases/download/v0.5.2/cronos_0.5.2_Darwin_x86_64.tar.gz",
+          "checksum": "9e5abec0c618a62900c8870db64e845a381668933e70592d49b3f301861769c0"
+        },
+        "windows": {
+          "link": "https://github.com/crypto-org-chain/cronos/releases/download/v0.5.2/cronos_0.5.2_Windows_x86_64.zip",
+          "checksum": "82cb3376be8074dfbd6a3a2f6b11cff30aad387b9d80c695293010c68bf8e79b"
+        },
+        "version": "v0.5.2"
+      }
+    ],
+    "seeds": "f34965195bf7e007c5694c8f5dbc902fce817852@13.213.254.205:26656,73fade66fc0870a073694588170407b513af6439@18.139.32.246:26656",
+    "persistent_peers": "f34965195bf7e007c5694c8f5dbc902fce817852@13.213.254.205:26656,73fade66fc0870a073694588170407b513af6439@18.139.32.246:26656",
+    "endpoint": {
+      "tendermint-rpc": "https://cronos-testnet.crypto.org:26657",
+      "lcd": "https://cronos-testnet.crypto.org:1317",
+      "grpc": "https://cronos-testnet.crypto.org:9090",
+      "evm-rpc": "https://cronos-testnet.crypto.org:8545"
+    },
+    "genesis_sha256sum": "c0e279664cc8204135498fbb3f33e4f45c9ebafeadb4ac1b514a1c84b7b3a7d8",
+    "denom": "ibc/6B5A664BF0AF4F71B2F0BAA33141E2F1321242FBD5D19762F541EC971ACB0865"
   }
+}
