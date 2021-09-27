@@ -8,12 +8,16 @@ To get started with the latest testnet, see the [docs](https://cronos.crypto.org
 
 ## Testnet Status
 
-- _Aug 25_ - `cronostestnet_338-1`
+- _Sept 25_ - `cronostestnet_338-2` 
+    - with `cronosd` [v0.5.4](https://github.com/crypto-org-chain/cronos/releases/tag/v0.5.4-testnet)
 
-    Note that `cronostestnet_338` is the discontinued .
+- _Aug 25_ - `cronostestnet_338-1`
+    - with `cronosd` [v0.5.2](https://github.com/crypto-org-chain/cronos/releases/tag/v0.5.2)
+
+
 
 - _July 20_ - `cronostestnet-338`
-
+    - Note that `cronostestnet_338` has been discontinued.
 
 [testnet.json](./testnet.json) lists all the existing testnets information.
 
@@ -35,20 +39,20 @@ To get started with the latest testnet, see the [docs](https://cronos.crypto.org
     - [Deploying Smart Contract](https://cronos.crypto.org/docs/getting-started/cronos-smart-contract.html)
 
 
-# RPCs for Cronos Testnet
+# RPCs for Cronos Testnet ( `cronostestnet_338-2` )
 
 1. **Tendermint RPC**
- - https://cronos-testnet.crypto.org/ 
- - http://cronos-testnet.crypto.org:26657/
+ - https://cronos-testnet-2.crypto.org/ 
+ - https://cronos-testnet-2.crypto.org:26657/
 
 2. **Cosmos RPC**
- - https://cronos-testnet.crypto.org:1317/
+ - https://cronos-testnet-2.crypto.org:1317/
 
 3. **gRPC Based**
- - https://cronos-testnet.crypto.org:9090/
+ - https://cronos-testnet-2.crypto.org:9090/
 
 4. **EVM HTTP JSON RPC** 
- - https://cronos-testnet.crypto.org:8545/
+ - https://cronos-testnet-2.crypto.org:8545/
 
 5. **EVM WS JSON RPC**
- - https://cronos-testnet.crypto.org:8546/
+ - https://cronos-testnet-2.crypto.org:8546/
