@@ -8,6 +8,10 @@ To get started with the latest testnet, see the [docs](https://cronos.crypto.org
 
 ## Testnet Status
 
+- _Oct 5_ - `cronostestnet_338-3` 
+    - with `cronosd` [v0.5.5](https://github.com/crypto-org-chain/cronos/releases/tag/v0.5.5-testnet)
+
+
 - _Sept 25_ - `cronostestnet_338-2` 
     - with `cronosd` [v0.5.4](https://github.com/crypto-org-chain/cronos/releases/tag/v0.5.4-testnet)
 
@@ -29,7 +33,7 @@ To get started with the latest testnet, see the [docs](https://cronos.crypto.org
 - [Faucet](https://cronos.crypto.org/faucet/) (Note that the faucet only takes eth-type `0x...`  addr)
 - [Binaries](https://github.com/crypto-org-chain/cronos/releases)
 - [Seeds for fullnode](https://github.com/crypto-org-chain/cronos-testnets/blob/main/testnet.json#L21)
-- [Testnet genesis](https://github.com/crypto-org-chain/cronos-testnets/blob/main/cronostestnet_338-1/genesis.json)
+- [Testnet genesis](https://github.com/crypto-org-chain/cronos-testnets/blob/main/cronostestnet_338-3/genesis.json)
 
 # Setup Guide
 
@@ -39,20 +43,20 @@ To get started with the latest testnet, see the [docs](https://cronos.crypto.org
     - [Deploying Smart Contract](https://cronos.crypto.org/docs/getting-started/cronos-smart-contract.html)
 
 
-# RPCs for Cronos Testnet ( `cronostestnet_338-2` )
+# RPCs for Cronos Testnet ( `cronostestnet_338-3` )
 
 1. **Tendermint RPC**
- - https://cronos-testnet-2.crypto.org/ 
- - https://cronos-testnet-2.crypto.org:26657/
+ - https://cronos-testnet-3.crypto.org/ 
+ - https://cronos-testnet-3.crypto.org:26657/
 
 2. **Cosmos RPC**
- - https://cronos-testnet-2.crypto.org:1317/
+ - https://cronos-testnet-3.crypto.org:1317/
 
 3. **gRPC Based**
- - https://cronos-testnet-2.crypto.org:9090/
+ - https://cronos-testnet-3.crypto.org:9090/
 
 4. **EVM HTTP JSON RPC** 
- - https://cronos-testnet-2.crypto.org:8545/
+ - https://cronos-testnet-3.crypto.org:8545/
 
 5. **EVM WS JSON RPC**
- - https://cronos-testnet-2.crypto.org:8546/
+ - https://cronos-testnet-3.crypto.org:8546/
