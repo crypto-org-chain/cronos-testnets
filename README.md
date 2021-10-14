@@ -7,6 +7,8 @@ This repo collects the genesis and configuration files for the Crypto.org Cronos
 To get started with the latest testnet, see the [docs](https://cronos.crypto.org/docs/getting-started/).
 
 ## Testnet Status
+- _Oct 13_ - `cronostestnet_338-3` 
+    - with `cronosd` [v0.6.0](https://github.com/crypto-org-chain/cronos/releases/tag/v0.6.0-testnet)
 
 - _Oct 5_ - `cronostestnet_338-3` 
     - with `cronosd` [v0.5.5](https://github.com/crypto-org-chain/cronos/releases/tag/v0.5.5-testnet)
