@@ -7,6 +7,10 @@ This repo collects the genesis and configuration files for the Crypto.org Cronos
 To get started with the latest testnet, see the [docs](https://cronos.crypto.org/docs/getting-started/).
 
 ## Testnet Status
+- _Dec 22 - `cronosgravitytestnet_340-1`
+    - with `cronosd` [v0.6.5](https://github.com/crypto-org-chain/cronos/releases/tag/v0.6.5)
+    - run with `--unsafe-experimental` flag after `cronosd start`
+
 - _Oct 13_ - `cronostestnet_338-3` 
     - with `cronosd` [v0.6.0](https://github.com/crypto-org-chain/cronos/releases/tag/v0.6.0-testnet)
 
@@ -62,3 +66,20 @@ To get started with the latest testnet, see the [docs](https://cronos.crypto.org
 
 5. **EVM WS JSON RPC**
  - https://cronos-testnet-3.crypto.org:8546/
+
+# RPCs for Cronos Testnet ( `cronosgravitytestnet_340-1` )
+
+1. **Tendermint RPC**
+ - https://rpc-cronos-gt1.crypto.org:443
+
+2. **Cosmos RPC**
+ - https://rest-cronos-gt1.crypto.org
+
+3. **gRPC Based**
+ - https://grpc-cronos-gt1.crypto.org
+
+4. **EVM HTTP JSON RPC** 
+ - https://evm-cronos-gt1.crypto.org
+
+5. **Explorer** 
+ - https://cronos.crypto.org/explorer/gravity/testnet
