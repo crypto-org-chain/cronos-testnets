@@ -9,37 +9,37 @@ To get started with the latest testnet, see the [docs](https://cronos.crypto.org
 ## Testnet Status
 
 - _Jan 28, 2022_ - `cronostestnet_338-3` 
-    - with `cronosd` [v0.7.0-rc1](https://github.com/crypto-org-chain/cronos/releases/tag/v0.7.0-rc1)
+    - with `cronosd` [v0.7.0-rc1-testnet](https://github.com/crypto-org-chain/cronos/releases/tag/v0.7.0-rc1)
 
 - _Jan 21, 2022_ - `cronostestnet_338-3` 
-    - with `cronosd` [v0.7.0-rc0](https://github.com/crypto-org-chain/cronos/releases/tag/v0.7.0-rc0)
+    - with `cronosd` [v0.7.0-rc0-testnet](https://github.com/crypto-org-chain/cronos/releases/tag/v0.7.0-rc0)
 
 - _Dec 21, 2021_ - `cronostestnet_338-3` 
-    - with `cronosd` [v0.6.5](https://github.com/crypto-org-chain/cronos/releases/tag/v0.6.5)
+    - with `cronosd` [v0.6.5-testnet](https://github.com/crypto-org-chain/cronos/releases/tag/v0.6.5)
 
 - _Nov 30, 2021_ - `cronostestnet_338-3` 
-    - with `cronosd` [v0.6.4](https://github.com/crypto-org-chain/cronos/releases/tag/v0.6.4)
+    - with `cronosd` [v0.6.4-testnet](https://github.com/crypto-org-chain/cronos/releases/tag/v0.6.4)
 
 - _Nov 29, 2021_ - `cronostestnet_338-3` 
-    - with `cronosd` [v0.6.3](https://github.com/crypto-org-chain/cronos/releases/tag/v0.6.3)
+    - with `cronosd` [v0.6.3-testnet](https://github.com/crypto-org-chain/cronos/releases/tag/v0.6.3)
 
 - _Nov 19, 2021_ - `cronostestnet_338-3` 
-    - with `cronosd` [v0.6.2](https://github.com/crypto-org-chain/cronos/releases/tag/v0.6.2)
+    - with `cronosd` [v0.6.2-testnet](https://github.com/crypto-org-chain/cronos/releases/tag/v0.6.2)
     
 - _Oct 26, 2021_ - `cronostestnet_338-3` 
-    - with `cronosd` [v0.6.1](https://github.com/crypto-org-chain/cronos/releases/tag/v0.6.1)
+    - with `cronosd` [v0.6.1-testnet](https://github.com/crypto-org-chain/cronos/releases/tag/v0.6.1)
     
 - _Oct 13, 2021_ - `cronostestnet_338-3` 
-    - with `cronosd` [v0.6.0](https://github.com/crypto-org-chain/cronos/releases/tag/v0.6.0-testnet)
+    - with `cronosd` [v0.6.0-testnet](https://github.com/crypto-org-chain/cronos/releases/tag/v0.6.0-testnet)
 
 - _Oct 5, 2021_ - `cronostestnet_338-3` 
-    - with `cronosd` [v0.5.5](https://github.com/crypto-org-chain/cronos/releases/tag/v0.5.5-testnet)
+    - with `cronosd` [v0.5.5-testnet](https://github.com/crypto-org-chain/cronos/releases/tag/v0.5.5-testnet)
 
 - _Sept 25, 2021_ - `cronostestnet_338-2` 
-    - with `cronosd` [v0.5.4](https://github.com/crypto-org-chain/cronos/releases/tag/v0.5.4-testnet)
+    - with `cronosd` [v0.5.4-testnet](https://github.com/crypto-org-chain/cronos/releases/tag/v0.5.4-testnet)
 
 - _Aug 25, 2021_ - `cronostestnet_338-1`
-    - with `cronosd` [v0.5.2](https://github.com/crypto-org-chain/cronos/releases/tag/v0.5.2)
+    - with `cronosd` [v0.5.2-testnet](https://github.com/crypto-org-chain/cronos/releases/tag/v0.5.2)
 
 - _July 20, 2021_ - `cronostestnet-338`
     - Note that `cronostestnet_338` has been discontinued.
