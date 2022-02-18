@@ -4,10 +4,13 @@ This repo collects the genesis and configuration files for the Crypto.org Cronos
 
 ## Getting Started
 
-To get started with the latest testnet, see the [docs](https://cronos.crypto.org/docs/getting-started/).
+To get started with the latest testnet, see the [docs](https://cronos.org/docs/getting-started/).
 
 ## Testnet Status
 
+- _Feb 15, 2022_ - `cronostestnet_338-3` 
+    - with `cronosd` [v0.7.0-rc2-testnet](https://github.com/crypto-org-chain/cronos/releases/tag/v0.7.0-rc2)
+   
 - _Jan 28, 2022_ - `cronostestnet_338-3` 
     - with `cronosd` [v0.7.0-rc1-testnet](https://github.com/crypto-org-chain/cronos/releases/tag/v0.7.0-rc1)
 
@@ -48,10 +51,10 @@ To get started with the latest testnet, see the [docs](https://cronos.crypto.org
 
 # Useful links 
 
-- [Cronos website](https://cronos.crypto.org/)
+- [Cronos website](https://cronos.org/)
 - [GitHub Repository](https://github.com/crypto-org-chain/cronos)
-- [Official Documentation](https://cronos.crypto.org/docs/)
-- [Faucet](https://cronos.crypto.org/faucet/) (Note that the faucet only takes eth-type `0x...`  addr)
+- [Official Documentation](https://cronos.org/docs/)
+- [Faucet](https://cronos.org/faucet/) (Note that the faucet only takes eth-type `0x...`  addr)
 - [Binaries](https://github.com/crypto-org-chain/cronos/releases)
 - [Seeds for fullnode](https://github.com/crypto-org-chain/cronos-testnets/blob/main/testnet.json#L21)
 - [Testnet genesis](https://github.com/crypto-org-chain/cronos-testnets/blob/main/cronostestnet_338-3/genesis.json)
@@ -59,25 +62,22 @@ To get started with the latest testnet, see the [docs](https://cronos.crypto.org
 # Setup Guide
 
 - **Cronos Testnet**:
-    - [Joining the Cronos Testnet](https://cronos.crypto.org/docs/getting-started/)
-    - [Using MetaMask](https://cronos.crypto.org/docs/getting-started/metamask.html)
-    - [Deploying Smart Contract](https://cronos.crypto.org/docs/getting-started/cronos-smart-contract.html)
+    - [Joining the Cronos Testnet](https://cronos.org/docs/getting-started/)
+    - [Using MetaMask](https://cronos.org/docs/getting-started/metamask.html)
+    - [Deploying Smart Contract](https://cronos.org/docs/getting-started/cronos-smart-contract.html)
 
 
 # RPCs for Cronos Testnet ( `cronostestnet_338-3` )
 
-1. **Tendermint RPC**
- - https://cronos-testnet-3.crypto.org/ 
- - https://cronos-testnet-3.crypto.org:26657/
+1. **Cosmos RPC**
+http://rpc-t3.cronos.org/
 
-2. **Cosmos RPC**
- - https://cronos-testnet-3.crypto.org:1317/
+2. **gRPC Based** 
+http://grpc-t3.cronos.org/
 
-3. **gRPC Based**
- - https://cronos-testnet-3.crypto.org:9090/
+3. **Cosmos RESTful**
+http://rest-t3.cronos.org/
 
 4. **EVM HTTP JSON RPC** 
- - https://cronos-testnet-3.crypto.org:8545/
-
-5. **EVM WS JSON RPC**
- - https://cronos-testnet-3.crypto.org:8546/
+http://evm-t3.cronos.org/
+#
