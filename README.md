@@ -4,7 +4,7 @@ This repo collects the genesis and configuration files for the Cronos testnets.
 
 ## Getting Started
 
-To get started with the latest testnet, see the [docs](https://cronos.org/docs/getting-started/).
+To get started with the latest testnet, see the [docs](https://docs.cronos.org/getting-started).
 
 ## Testnet Status
 - _May 2, 2022_ - `cronostestnet_338-3`
@@ -61,19 +61,11 @@ To get started with the latest testnet, see the [docs](https://cronos.org/docs/g
 
 - [Cronos website](https://cronos.org/)
 - [GitHub Repository](https://github.com/crypto-org-chain/cronos)
-- [Official Documentation](https://cronos.org/docs/)
+- [Official Documentation](https://docs.cronos.org/)
 - [Faucet](https://cronos.org/faucet/) (Note that the faucet only takes eth-type `0x...`  addr)
 - [Binaries](https://github.com/crypto-org-chain/cronos/releases)
 - [Seeds for fullnode](https://github.com/crypto-org-chain/cronos-testnets/blob/main/testnet.json#L21)
 - [Testnet genesis](https://github.com/crypto-org-chain/cronos-testnets/blob/main/cronostestnet_338-3/genesis.json)
-
-# Setup Guide
-
-- **Cronos Testnet**:
-    - [Joining the Cronos Testnet](https://cronos.org/docs/getting-started/)
-    - [Using MetaMask](https://cronos.org/docs/getting-started/metamask.html)
-    - [Deploying Smart Contract](https://cronos.org/docs/getting-started/cronos-smart-contract.html)
-
 
 # RPCs for Cronos Testnet ( `cronostestnet_338-3` )
 
