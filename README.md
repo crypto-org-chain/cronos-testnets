@@ -1,6 +1,6 @@
-# Crypto.org Cronos Testnets
+# Cronos Testnets
 
-This repo collects the genesis and configuration files for the Crypto.org Cronos testnets.
+This repo collects the genesis and configuration files for the Cronos testnets.
 
 ## Getting Started
 
