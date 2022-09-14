@@ -7,6 +7,9 @@ This repo collects the genesis and configuration files for the Cronos testnets.
 To get started with the latest testnet, see the [docs](https://docs.cronos.org/getting-started).
 
 ## Testnet Status
+- Sep 14, 2022_ - `cronostestnet_338-3`
+  - with `cronosd` [v0.9.0-beta2](https://github.com/crypto-org-chain/cronos/releases/tag/v0.9.0-beta2)
+  
 - _Aug 30, 2022_ - `cronostestnet_338-3`
   - with `cronosd` [v0.8.1-testnet](https://github.com/crypto-org-chain/cronos/releases/tag/v0.8.1)
 
@@ -63,9 +66,6 @@ To get started with the latest testnet, see the [docs](https://docs.cronos.org/g
 ## Gravity Bridge Testnet Status
 - _Aug 26, 2022_ - `pioneereleventestnet_340-1`
   - with `cronosd` [v0.8.0-gravity-alpha1-patch](https://github.com/crypto-org-chain/cronos/releases/tag/v0.8.0-gravity-alpha1-patch)
-
-- _Aug 25, 2022_ - `pioneereleventestnet_340-1`
-  - with `cronosd` [v0.8.0-gravity-alpha2](https://github.com/crypto-org-chain/cronos/releases/tag/v0.8.0-gravity-alpha2)
 
 - _Aug 22, 2022_ - `pioneereleventestnet_340-1`
   - with `cronosd` [v0.8.0-gravity-alpha1](https://github.com/crypto-org-chain/cronos/releases/tag/v0.8.0-gravity-alpha1)
