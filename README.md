@@ -8,7 +8,7 @@ To get started with the latest testnet, see the [docs](https://docs.cronos.org/g
 
 ## Testnet Status
 - _Aug 30, 2022_ - `cronostestnet_338-3`
-  - with `cronosd` [v0.8.0-testnet](https://github.com/crypto-org-chain/cronos/releases/tag/v0.8.0)
+  - with `cronosd` [v0.8.1-testnet](https://github.com/crypto-org-chain/cronos/releases/tag/v0.8.1)
 
 - _May 2, 2022_ - `cronostestnet_338-3`
   - with `cronosd` [v0.7.0-testnet](https://github.com/crypto-org-chain/cronos/releases/tag/v0.7.0)
