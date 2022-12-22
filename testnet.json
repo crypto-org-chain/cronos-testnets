@@ -1,7 +1,22 @@
 {
   "cronostestnet_338-3": {
-    "latest_version": "v0.7.0-rc3",
+    "latest_version": "v1.0.0-rc4",
     "binary": [
+      {
+        "linux": {
+          "link": "https://github.com/crypto-org-chain/cronos/releases/download/v1.0.0-rc4/cronos_1.0.0-rc4-testnet_Linux_x86_64.tar.gz",
+          "checksum": "2daf6fadc6dbcc9508e232611817b9377d94a2962a76f3821386c0c7255036b4"
+        },
+        "osx": {
+          "link": "https://github.com/crypto-org-chain/cronos/releases/download/v1.0.0-rc4/cronos_1.0.0-rc4-testnet_Darwin_x86_64.tar.gz",
+          "checksum": "39f63c98ccd6f6f1d4bc392c0baeb7aab916c0d002348c212b5f34b3d58b865f"
+        },
+        "windows": {
+          "link": "https://github.com/crypto-org-chain/cronos/releases/download/v1.0.0-rc4/cronos_1.0.0-rc4-testnet_Windows_x86_64.tar.gz",
+          "checksum": "10a962714567ca0aa25e8061512dcc04708649db21131e651339dabafb98a556"
+        },
+        "version": "v1.0.0-rc4"
+      },
       {
         "linux": {
           "link": "https://github.com/crypto-org-chain/cronos/releases/download/v0.7.0-rc3/cronos_0.7.0-rc3-testnet_Linux_x86_64.tar.gz",
