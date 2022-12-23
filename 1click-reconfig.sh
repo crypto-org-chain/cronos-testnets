@@ -14,6 +14,7 @@ download_binary()
     TEMP_DIR="$(mktemp -d)"
     curl -LJ $(curl -sS $NETWORK_JSON | jq -r ".\"$NETWORK\".binary | .[] | select(.version==\"$CM_DESIRED_VERSION\").linux.link") -o $TEMP_DIR/cronosd.tar.gz
     CHECKSUM=$(curl -sS $NETWORK_JSON | jq -r ".\"$NETWORK\".binary | .[] | select(.version==\"$CM_DESIRED_VERSION\").linux.checksum")
+    echo "downloaded $CHECKSUM"
     if (! echo "$CHECKSUM $TEMP_DIR/cronos.tar.gz" | sha256sum -c --status --quiet - > /dev/null 2>&1) ; then
         echo_s "The checksum does not match the target downloaded file! Something wrong from download source, please try again or create an issue for it."
         exit 1
@@ -117,7 +118,7 @@ checkout_network()
             echo_s "The selected network is $NETWORK"
             GENESIS_TARGET_SHA256=$(curl -sS $NETWORK_JSON | jq -r ".\"$NETWORK\".genesis_sha256sum")
             if [[ ! -f "$CM_GENESIS" ]] || (! echo "$GENESIS_TARGET_SHA256 $CM_GENESIS" | sha256sum -c --status --quiet - > /dev/null 2>&1) ; then
-                echo_s "The genesis does not exit or the sha256sum does not match the target one. Download the target genesis from github."
+                echo_s "The genesis does not exist or the sha256sum does not match the target one. Download the target genesis from github."
                 download_genesis
             fi
             SEEDS=$(curl -sS $NETWORK_JSON | jq -r ".\"$NETWORK\".seeds")
