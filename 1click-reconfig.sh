@@ -15,7 +15,7 @@ download_binary()
     curl -LJ $(curl -sS $NETWORK_JSON | jq -r ".\"$NETWORK\".binary | .[] | select(.version==\"$CM_DESIRED_VERSION\").linux.link") -o $TEMP_DIR/cronosd.tar.gz
     CHECKSUM=$(curl -sS $NETWORK_JSON | jq -r ".\"$NETWORK\".binary | .[] | select(.version==\"$CM_DESIRED_VERSION\").linux.checksum")
     echo "downloaded $CHECKSUM"
-    if (! echo "$CHECKSUM $TEMP_DIR/cronos.tar.gz" | sha256sum -c --status --quiet - > /dev/null 2>&1) ; then
+    if (! echo "$CHECKSUM $TEMP_DIR/cronosd.tar.gz" | sha256sum -c --status --quiet - > /dev/null 2>&1) ; then
         echo_s "The checksum does not match the target downloaded file! Something wrong from download source, please try again or create an issue for it."
         exit 1
     fi
