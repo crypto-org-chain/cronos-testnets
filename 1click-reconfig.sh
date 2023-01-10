@@ -151,12 +151,11 @@ if [[ -d "$CM_HOME/data" ]]; then
         [Yy]* ) 
             StopService;
             if [[ ${CM_DESIRED_VERSION:1:5} > 0.6.11 ]]; then
-                $CM_BINARY tendermint unsafe-reset-all --home $CM_HOME;
-                $CM_BINARY tendermint reset-state --home $CM_HOME;;
-                exit 0
+                $CM_BINARY tendermint unsafe-reset-all --home $CM_HOME
+                $CM_BINARY tendermint reset-state --home $CM_HOME
             else 
-                $CM_BINARY unsafe-reset-all --home $CM_HOME;;
-            fi
+                $CM_BINARY unsafe-reset-all --home $CM_HOME
+            fi;;
         * ) echo_s "Not delete and exit\n"; exit 0;;
     esac
 fi
