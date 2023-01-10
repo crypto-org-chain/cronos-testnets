@@ -108,7 +108,7 @@ checkout_network()
                 * ) 
                     echo_s "Normal-sync require the preceding version of binary to sync from scratch."
                     DisableStateSync
-                    CM_DESIRED_VERSION=$(curl -sS $NETWORK_JSON | jq -r ".\"$NETWORK\".binary | .[-1].version")
+                    CM_DESIRED_VERSION=$(curl -sS $NETWORK_JSON | jq -r ".\"$NETWORK\".binary | .[-2].version")
                 ;;
             esac
             echo_s "The current binary version: $CM_DESIRED_VERSION"
