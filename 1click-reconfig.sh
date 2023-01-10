@@ -172,7 +172,7 @@ do
         sed -i "s/^\(moniker\s*=\s*\).*\$/\1\"$MONIKER\"/" $CM_CONFIG
         DENOM=$(curl -sS $NETWORK_JSON | jq -r ".\"$NETWORK\".denom")
         sed -i "s/^\(\s*\[\"chain_id\",\s*\).*\$/\1\"$NETWORK\"],/" $CM_HOME/config/app.toml
-        sed -i "s/^\(minimum-gas-prices\s*=\s*\"[0-9]\+\.[0-9]\+\).*\$/\1$DENOM\"/" $CM_HOME/config/app.toml
+        sed -i "s/^\(minimum-gas-prices\s*=\s*\"[0-9]\+\.[0-9]\+\).*\$/\5000000000000$DENOM\"/" $CM_HOME/config/app.toml
 
         read -p "Do you want to add the public IP of this node for p2p gossip? (Y/N): " yn
         case $yn in
