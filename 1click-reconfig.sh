@@ -111,6 +111,7 @@ checkout_network()
                     CM_DESIRED_VERSION=$(curl -sS $NETWORK_JSON | jq -r ".\"$NETWORK\".binary | .[-1].version")
                 ;;
             esac
+            echo_s "The current binary version: $CM_DESIRED_VERSION"
             if [[ ! -f "$CM_BINARY" ]] || [[ $($CM_BINARY version 2>&1) != $CM_DESIRED_VERSION ]]; then
                 echo_s "The binary does not exist or the version does not match the target version. Download the target version binary from github release."
                 download_binary
