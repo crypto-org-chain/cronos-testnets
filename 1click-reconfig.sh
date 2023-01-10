@@ -154,8 +154,9 @@ if [[ -d "$CM_HOME/data" ]]; then
                 $CM_BINARY tendermint unsafe-reset-all --home $CM_HOME
                 $CM_BINARY tendermint reset-state --home $CM_HOME
                 exit 0
+            else 
+                $CM_BINARY unsafe-reset-all --home $CM_HOME
             fi
-            $CM_BINARY unsafe-reset-all --home $CM_HOME
         ;;
         * ) echo_s "Not delete and exit\n"; exit 0;;
     esac
