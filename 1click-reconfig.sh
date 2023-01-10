@@ -38,32 +38,7 @@ StopService()
     echo_s "Stopping cronosd service"
     sudo systemctl stop cronosd.service
 }
-# Regenerate priv_validator_key.json
-RegenerateValidatorKey()
-{
-    rm -f $CM_HOME/config/priv_validator_key.json;
-    echo_s "A new priv_validator_key.json with pubkey: \033[32m$($CM_BINARY tendermint show-validator --home $CM_HOME 2>&1)\033[0m\n"
-}
-# Regenerate node_key.json
-RegenerateNodeKeyJSON()
-{
-    echo_s "Generate and replace node_key in $NODE_KEY_PATH\n"
-    rm -f $CM_HOME/config/node_key.json
-    TEMP_DIR=$(mktemp -d)
-    $CM_BINARY init test --home $TEMP_DIR > /dev/null 2>&1
-    mv $TEMP_DIR/config/node_key.json $CM_HOME/config/node_key.json
-    rm -rf $TEMP_DIR
-    ShowNodeKeyInfo
-}
-# print node_key and node_id
-ShowNodeKeyInfo()
-{
-    NODE_ID=$($CM_BINARY tendermint show-node-id --home $CM_HOME)
-    NODE_KEY=$(cat $NODE_KEY_PATH | jq .priv_key.value -r)
-    echo_s "You may want to save node_id and node_key for later use\n"
-    echo_s "node_id: \033[32m$NODE_ID\033[0m\n"
-    echo_s "node_key: \033[32m$NODE_KEY\033[0m\n"
-}
+
 # allow gossip this ip
 AllowGossip()
 {
@@ -133,7 +108,7 @@ checkout_network()
                 * ) 
                     echo_s "Normal-sync require the preceding version of binary to sync from scratch."
                     DisableStateSync
-                    CM_DESIRED_VERSION=$(curl -sS $NETWORK_JSON | jq -r ".\"$NETWORK\".binary | .[0].version")
+                    CM_DESIRED_VERSION=$(curl -sS $NETWORK_JSON | jq -r ".\"$NETWORK\".binary | .[-1].version")
                 ;;
             esac
             if [[ ! -f "$CM_BINARY" ]] || [[ $($CM_BINARY version 2>&1) != $CM_DESIRED_VERSION ]]; then
@@ -173,23 +148,18 @@ echo_s "Reset cronosd and remove data if any"
 if [[ -d "$CM_HOME/data" ]]; then
     read -p '❗️ Enter (Y/N) to confirm to delete any old data: ' yn
     case $yn in
-        [Yy]* ) StopService; $CM_BINARY tendermint unsafe-reset-all --home $CM_HOME; $CM_BINARY tendermint reset-state --home $CM_HOME;;
+        [Yy]* ) 
+            StopService
+            if  if [[ ${CM_DESIRED_VERSION:1:5} > 0.6.11 ]]; then
+                $CM_BINARY tendermint unsafe-reset-all --home $CM_HOME
+                $CM_BINARY tendermint reset-state --home $CM_HOME
+                exit 0
+            fi
+            $CM_BINARY unsafe-reset-all --home $CM_HOME
+        ;;
         * ) echo_s "Not delete and exit\n"; exit 0;;
     esac
 fi
-
-# Regenerate validator key
-VALIDATOR_KEY="$CM_HOME/config/priv_validator_key.json"
-if [[ -f "$VALIDATOR_KEY" ]]; then
-    read -p "❗️ $VALIDATOR_KEY already exists! Do you want to override old key? (Y/N): " yn
-    case $yn in
-        [Yy]* ) RegenerateValidatorKey;;
-        * ) echo_s "Keep the original priv_validator_key.json in $VALIDATOR_KEY with pubkey: \033[32m$($CM_BINARY tendermint show-validator --home $CM_HOME 2>&1)\033[0m";;
-    esac
-else
-    RegenerateValidatorKey
-fi
-echo_s "💡 Please make sure you have a backup of $VALIDATOR_KEY in case of unexpected accidents!\n"
 
 # Config .cronos/config/config.toml
 echo_s "Replace moniker in $CM_CONFIG"
@@ -217,18 +187,6 @@ do
     fi
 
 done
-
-# generate new node id and node key
-NODE_KEY_PATH="$CM_HOME/config/node_key.json"
-if [[ -f "$NODE_KEY_PATH" ]]; then
-    read -p "$NODE_KEY_PATH already exists! Do you want to override old node_key.json? (Y/N): " yn
-    case $yn in
-        [Yy]* ) RegenerateNodeKeyJSON;;
-        * ) echo_s "Keep the original node_key.json in $NODE_KEY_PATH\n"; ShowNodeKeyInfo;;
-    esac
-else
-    RegenerateNodeKeyJSON
-fi
 
 # Restart service
 echo_s "👏🏻 Restarting cronosd service\n"
