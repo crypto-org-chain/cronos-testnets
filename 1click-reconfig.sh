@@ -150,7 +150,7 @@ if [[ -d "$CM_HOME/data" ]]; then
     case $yn in
         [Yy]* ) 
             StopService
-            if  if [[ ${CM_DESIRED_VERSION:1:5} > 0.6.11 ]]; then
+            if [[ ${CM_DESIRED_VERSION:1:5} > 0.6.11 ]]; then
                 $CM_BINARY tendermint unsafe-reset-all --home $CM_HOME
                 $CM_BINARY tendermint reset-state --home $CM_HOME
                 exit 0
