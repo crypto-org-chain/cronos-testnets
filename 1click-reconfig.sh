@@ -136,7 +136,7 @@ fi
 
 
 # Select network
-NETWORK_URL="https://raw.githubusercontent.com/crypto-org-chain/cronos-testnets/fix/update-1click-reconfig-script/testnet.json" #change back to main
+NETWORK_URL="https://raw.githubusercontent.com/crypto-org-chain/cronos-testnets/fix/update-1click-reconfig-script" #change back to main
 NETWORK_JSON="$NETWORK_URL/testnet.json"
 CM_HOME="/chain/.cronos"
 CM_CONFIG="$CM_HOME/config/config.toml"
