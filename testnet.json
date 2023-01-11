@@ -64,18 +64,18 @@
       },
       {
         "linux": {
-          "link": "https://github.com/crypto-org-chain/cronos/releases/download/v0.6.11/cronos_0.6.11-testnet_Linux_x86_64.tar.gz",
-          "checksum": "cdb55478d36c0c6b34f1545e72696edf1dbe7e5fdc789184ef3b4af5b5a4071f"
+          "link": "https://github.com/crypto-org-chain/cronos/releases/download/v0.6.5/cronos_0.6.5-testnet_Linux_x86_64.tar.gz",
+          "checksum": "1ec7dd6864250b8e02841b47f49536cf7931a59afc5f35dabf797a2a842a2015"
         },
         "osx": {
-          "link": "https://github.com/crypto-org-chain/cronos/releases/download/v0.6.11/cronos_0.6.11-testnet_Linux_x86_64.tar.gz",
-          "checksum": "64653713efc62ddaa263af4c9650f9cf345f352e279685f70db82768bc91b588"
+          "link": "https://github.com/crypto-org-chain/cronos/releases/download/v0.6.5/cronos_0.6.5-testnet_Darwin_x86_64.tar.gz",
+          "checksum": "693549df3deb1371f98e63d8aa62d22a16a7dc1119eaba150b2a9073554ff63f"
         },
         "windows": {
-          "link": "https://github.com/crypto-org-chain/cronos/releases/download/v0.6.11/cronos_0.6.11-testnet_Windows_x86_64.zip",
-          "checksum": "941f4ca2c2923acf42b5136dfaad11d4fa846681caf16639cf2c1d9a1d43b1b9"
+          "link": "https://github.com/crypto-org-chain/cronos/releases/download/v0.6.5/cronos_0.6.5-testnet_Windows_x86_64.zip",
+          "checksum": "92884d5f50d42dce2ade9b8a62da7689882b5ad4af37634b51d56d8e776cd3dc"
         },
-        "version": "v0.6.11"
+        "version": "v0.6.5"
       },
       {
         "linux": {
