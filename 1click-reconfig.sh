@@ -20,8 +20,9 @@ download_binary()
         exit 1
     fi
     tar -xzf $TEMP_DIR/cronosd.tar.gz -C $TEMP_DIR
+    echo_s "moving from temp dir $TEMP_DIR to target dir $CM_BINARY"
     mv $TEMP_DIR/**/cronosd $CM_BINARY
-    rm -rf $TEMP_DIR
+    rm -rf $TEMP_DIR    
 }
 DaemonReloadFunction()
 {
@@ -151,7 +152,7 @@ if [[ -d "$CM_HOME/data" ]]; then
     case $yn in
         [Yy]* ) 
             StopService;
-            if [[ ${CM_DESIRED_VERSION:1:5} > 0.6.11 ]]; then
+            if [[ $(echo "${CM_DESIRED_VERSION:1}\n0.6.12"|sort|head -1) != "${CM_DESIRED_VERSION:1}" ]]; then
                 $CM_BINARY tendermint unsafe-reset-all --home $CM_HOME
                 $CM_BINARY tendermint reset-state --home $CM_HOME
             else 
