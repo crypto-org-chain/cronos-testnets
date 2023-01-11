@@ -21,7 +21,7 @@ download_binary()
     fi
     tar -xzf $TEMP_DIR/cronosd.tar.gz -C $TEMP_DIR
     echo_s "moving from temp dir $TEMP_DIR to target dir $CM_BINARY"
-    mv $TEMP_DIR/bin/cronosd $CM_BINARY
+    mv $TEMP_DIR/ $CM_DIR
     rm -rf $TEMP_DIR    
 }
 DaemonReloadFunction()
@@ -141,6 +141,7 @@ NETWORK_URL="https://raw.githubusercontent.com/crypto-org-chain/cronos-testnets/
 NETWORK_JSON="$NETWORK_URL/testnet.json"
 CM_HOME="/chain/.cronos"
 CM_CONFIG="$CM_HOME/config/config.toml"
+CM_DIR="/chain/"
 CM_BINARY="/chain/bin/cronosd"
 CM_GENESIS="$CM_HOME/config/genesis.json"
 checkout_network
