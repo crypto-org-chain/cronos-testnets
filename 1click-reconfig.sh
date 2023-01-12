@@ -29,8 +29,8 @@ InitChain()
 
     if [[ -n "$MONIKER" ]] ; then
         $CM_BINARY init $MONIKER --chain-id $NETWORK --home $CM_HOME
-        SEEDS=$(curl -sS $NETWORK_JSON | jq -r ".\"$NETWORK\".seeds")
-        sed -i "s/^\(seeds\s*=\s*\).*\$/\1\"$SEEDS\"/" $CM_CONFIG
+        PERSISTENT_PEERS=$(curl -sS $NETWORK_JSON | jq -r ".\"$NETWORK\".seeds")
+        sed -i "s/^\(persistent_peers\s*=\s*\).*\$/\1\"$PERSISTENT_PEERS\"/" $CM_CONFIG
     else
         echo_s "moniker is not set. Try again!\n"
     fi
@@ -40,7 +40,6 @@ StartService()
     # Enable systemd service for cronosd
     sudo systemctl daemon-reload
     sudo systemctl enable cronosd.service
-    # Restart service
     echo_s "👏🏻 Restarting cronosd service\n"
     sudo systemctl restart cronosd.service
     sudo systemctl restart rsyslog
@@ -53,7 +52,6 @@ StopService()
     sudo systemctl stop cronosd.service
 }
 
-# allow gossip this ip
 AllowGossip()
 {
     # find IP
@@ -66,6 +64,7 @@ AllowGossip()
 }
 EnableStateSync()
 {
+    #Setting up statesync
     RPC_SERVERS=$(curl -sS $NETWORK_JSON | jq -r ".\"$NETWORK\".endpoint.rpc")
     LASTEST_HEIGHT=$(curl -s $RPC_SERVERS/block | jq -r .result.block.header.height)
     BLOCK_HEIGHT=$((LASTEST_HEIGHT - 300))
@@ -87,16 +86,17 @@ DisableStateSync()
 {
     sed -i "s/^\(enable\s*=\s*\).*\$/\1false/" $CM_CONFIG
 }
-clearData()
+clearDataAndBinary()
 {
-    #Remove old data
+    #Remove old dataand binary
     echo_s "Reset cronosd and remove data if any"
     if [[ -d "$CM_HOME/data" ]]; then
         read -p '❗️ Enter (Y/N) to confirm to delete any old data: ' yn
         case $yn in
             [Yy]* ) 
                 StopService;
-                rm -rf $CM_HOME/;;
+                rm -rf $CM_HOME/ 
+                rm -rf $CM_BINARY $CM_DIR/cronosd.tar.gz $CM_DIR/exe $CM_DIR/lib;;
             * ) echo_s "Not delete and exit\n";;
         esac
     fi
@@ -129,16 +129,13 @@ checkout_network()
             fi
             NETWORK=${arr[index]}
             echo_s "The selected network is $NETWORK"
-            clearData
-            
             read -p "Select Y to initalize the chain with the current binary. Select N if you have initialized manually before (Y/N): " yn
             case $yn in
                 [Yy]* ) 
-                    if [[ ! -f "$CM_BINARY" ]]; then
-                        echo_s "The binary does not exist. Download the target version $CM_DESIRED_VERSION binary from github release."
-                        CM_DESIRED_VERSION=$(curl -sS $NETWORK_JSON | jq -r ".\"$NETWORK\".binary | .[-1].version")
-                        download_binary
-                    fi
+                    clearDataAndBinary
+                    echo_s "Download the target version $CM_DESIRED_VERSION binary from github release."
+                    CM_DESIRED_VERSION=$(curl -sS $NETWORK_JSON | jq -r ".\"$NETWORK\".binary | .[-1].version")
+                    download_binary
                     InitChain
                 ;;
                 * ) 
@@ -153,13 +150,17 @@ checkout_network()
                     CM_DESIRED_VERSION=$(curl -sS $NETWORK_JSON | jq -r ".\"$NETWORK\".latest_version")
                     if [[ ! -f "$CM_BINARY" ]] || [[ $($CM_BINARY version 2>&1) != $CM_DESIRED_VERSION ]]; then
                         echo_s "The binary does not exist or the version does not match the target version. Download the target version binary from github release."
+                        clearDataAndBinary
                         download_binary
-                        clearData
                         InitChain
                     fi
                     EnableStateSync
                 ;;
                 * ) 
+                    if [[ ! -f "$CM_BINARY" ]]; then
+                       echo_s "Restart this script and select Y to init chain." 
+                       exit 1
+                    fi 
                     DisableStateSync
                 ;;
             esac
@@ -194,10 +195,10 @@ require_jq()
 # Select network
 NETWORK_URL="https://raw.githubusercontent.com/crypto-org-chain/cronos-testnets/fix/update-1click-reconfig-script"
 NETWORK_JSON="$NETWORK_URL/testnet.json"
-CM_HOME="/chain/.cronos"
-CM_CONFIG="$CM_HOME/config/config.toml"
 CM_DIR="/chain/"
+CM_HOME="/chain/.cronos"
 CM_BINARY="/chain/bin/cronosd"
+CM_CONFIG="$CM_HOME/config/config.toml"
 CM_GENESIS="$CM_HOME/config/genesis.json"
 
 require_jq
