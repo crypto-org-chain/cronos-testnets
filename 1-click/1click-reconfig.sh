@@ -194,7 +194,7 @@ require_jq()
 
 
 # Select network
-NETWORK_URL="https://raw.githubusercontent.com/crypto-org-chain/cronos-testnets/fix/update-1click-reconfig-script"
+NETWORK_URL="https://raw.githubusercontent.com/crypto-org-chain/cronos-testnets/main"
 NETWORK_JSON="$NETWORK_URL/testnet.json"
 CM_DIR="/chain"
 CM_HOME="/chain/.cronos"
