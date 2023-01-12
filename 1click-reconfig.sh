@@ -10,19 +10,15 @@ download_genesis()
 shopt -s globstar
 download_binary()
 {
-    echo_s "💾 Downloading $NETWORK binary"
-    TEMP_DIR="$(mktemp -d)"
-    curl -LJ $(curl -sS $NETWORK_JSON | jq -r ".\"$NETWORK\".binary | .[] | select(.version==\"$CM_DESIRED_VERSION\").linux.link") -o $TEMP_DIR/cronosd.tar.gz
+    echo_s "💾 Downloading $CM_DESIRED_VERSION binary"
+    curl -LJ $(curl -sS $NETWORK_JSON | jq -r ".\"$NETWORK\".binary | .[] | select(.version==\"$CM_DESIRED_VERSION\").linux.link") -o cronosd.tar.gz
     CHECKSUM=$(curl -sS $NETWORK_JSON | jq -r ".\"$NETWORK\".binary | .[] | select(.version==\"$CM_DESIRED_VERSION\").linux.checksum")
     echo "downloaded $CHECKSUM"
-    if (! echo "$CHECKSUM $TEMP_DIR/cronosd.tar.gz" | sha256sum -c --status --quiet - > /dev/null 2>&1) ; then
+    if (! echo "$CHECKSUM cronosd.tar.gz" | sha256sum -c --status --quiet - > /dev/null 2>&1) ; then
         echo_s "The checksum does not match the target downloaded file! Something wrong from download source, please try again or create an issue for it."
         exit 1
     fi
-    tar -xzf $TEMP_DIR/cronosd.tar.gz -C $TEMP_DIR
-    echo_s "moving from temp dir $TEMP_DIR to target dir $CM_BINARY"
-    cp -rlf $TEMP_DIR/ $CM_DIR
-    rm -rf $TEMP_DIR    
+    tar -xzf cronosd.tar.gz
 }
 DaemonReloadFunction()
 {
