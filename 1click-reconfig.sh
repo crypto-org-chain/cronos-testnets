@@ -37,10 +37,14 @@ InitChain()
 }
 StartService()
 {
+    # Enable systemd service for cronosd
     sudo systemctl daemon-reload
     sudo systemctl enable cronosd.service
+    # Restart service
+    echo_s "👏🏻 Restarting cronosd service\n"
     sudo systemctl restart cronosd.service
     sudo systemctl restart rsyslog
+    echo_s "👀 View the log by \"\033[32mjournalctl -u cronosd.service -f\033[0m\" or find in /chain/log/cronosd/cronosd.log"
 }
 StopService()
 {
@@ -83,6 +87,30 @@ DisableStateSync()
 {
     sed -i "s/^\(enable\s*=\s*\).*\$/\1false/" $CM_CONFIG
 }
+clearData()
+{
+    #Remove old data
+    echo_s "Reset cronosd and remove data if any"
+    if [[ -d "$CM_HOME/data" ]]; then
+        read -p '❗️ Enter (Y/N) to confirm to delete any old data: ' yn
+        case $yn in
+            [Yy]* ) 
+                StopService;
+                rm -rf $CM_HOME/;;
+            * ) echo_s "Not delete and exit\n";;
+        esac
+    fi
+}
+shareIP()
+{
+    read -p "Do you want to add the public IP of this node for p2p gossip? (Y/N): " yn
+    case $yn in
+        [Yy]* ) AllowGossip;;
+        * )
+            echo_s "WIll keep 'external_address value' empty\n";
+            sed -i "s/^\(external_address\s*=\s*\).*\$/\1\"\"/" $CM_CONFIG;;
+    esac
+}
 shopt -s extglob
 checkout_network()
 {
@@ -101,32 +129,38 @@ checkout_network()
             fi
             NETWORK=${arr[index]}
             echo_s "The selected network is $NETWORK"
+            clearData
+            
+            read -p "Select Y to initalize the chain with the current binary. Select N if you have initialized manually before (Y/N): " yn
+            case $yn in
+                [Yy]* ) 
+                    if [[ ! -f "$CM_BINARY" ]]; then
+                        echo_s "The binary does not exist. Download the target version $CM_DESIRED_VERSION binary from github release."
+                        CM_DESIRED_VERSION=$(curl -sS $NETWORK_JSON | jq -r ".\"$NETWORK\".binary | .[-1].version")
+                        download_binary
+                    fi
+                    InitChain
+                ;;
+                * ) 
+                    echo_s "Continue assuming you have ran ./cronosd init by yourself"
+                ;;
+            esac
             read -p "Do you want to enable state-sync? (Y/N): " yn
             case $yn in
                 [Yy]* ) 
                     echo_s "State-sync requires the latest version of binary to state-sync from the latest block."
                     echo_s "Be aware that the latest binary might contain extra dependencies!"
-                    EnableStateSync
                     CM_DESIRED_VERSION=$(curl -sS $NETWORK_JSON | jq -r ".\"$NETWORK\".latest_version")
+                    if [[ ! -f "$CM_BINARY" ]] || [[ $($CM_BINARY version 2>&1) != $CM_DESIRED_VERSION ]]; then
+                        echo_s "The binary does not exist or the version does not match the target version. Download the target version binary from github release."
+                        download_binary
+                        clearData
+                        InitChain
+                    fi
+                    EnableStateSync
                 ;;
                 * ) 
-                    echo_s "Normal-sync requires the preceding version of binary to sync from scratch."
                     DisableStateSync
-                    CM_DESIRED_VERSION=$(curl -sS $NETWORK_JSON | jq -r ".\"$NETWORK\".binary | .[-1].version")
-                ;;
-            esac
-            echo_s "The current binary version: $CM_DESIRED_VERSION"
-            if [[ ! -f "$CM_BINARY" ]] || [[ $($CM_BINARY version 2>&1) != $CM_DESIRED_VERSION ]]; then
-                echo_s "The binary does not exist or the version does not match the target version. Download the target version binary from github release."
-                download_binary
-            fi
-            read -p "Do you want to initalize the chain. Select N if you have already initialized? (Y/N): " yn
-            case $yn in
-                [Yy]* ) 
-                    InitChain
-                ;;
-                * ) 
-                    echo_s "Continue assuming you have ran ./cronosd init by yourself"
                 ;;
             esac
             GENESIS_TARGET_SHA256=$(curl -sS $NETWORK_JSON | jq -r ".\"$NETWORK\".genesis_sha256sum")
@@ -134,6 +168,7 @@ checkout_network()
                 echo_s "The genesis does not exist or the sha256sum does not match the target one. Download the target genesis from github."
                 download_genesis
             fi
+            shareIP
         ;;
         *)
             echo_s "No match"
@@ -167,29 +202,4 @@ CM_GENESIS="$CM_HOME/config/genesis.json"
 
 require_jq
 checkout_network
-
-# Remove old data
-echo_s "Reset cronosd and remove data if any"
-if [[ -d "$CM_HOME/data" ]]; then
-    read -p '❗️ Enter (Y/N) to confirm to delete any old data: ' yn
-    case $yn in
-        [Yy]* ) 
-            StopService;
-            rm -rf $CM_HOME/;;
-        * ) echo_s "Not delete and exit\n";;
-    esac
-fi
-
-read -p "Do you want to add the public IP of this node for p2p gossip? (Y/N): " yn
-case $yn in
-    [Yy]* ) AllowGossip;;
-    * )
-        echo_s "WIll keep 'external_address value' empty\n";
-        sed -i "s/^\(external_address\s*=\s*\).*\$/\1\"\"/" $CM_CONFIG;;
-esac
-
-# Restart service
-echo_s "👏🏻 Restarting cronosd service\n"
-# Enable systemd service for cronosd
 StartService
-echo_s "👀 View the log by \"\033[32mjournalctl -u cronosd.service -f\033[0m\" or find in /chain/log/cronosd/cronosd.log"
