@@ -11,14 +11,14 @@ shopt -s globstar
 download_binary()
 {
     echo_s "💾 Downloading $CM_DESIRED_VERSION binary"
-    curl -LJ $(curl -sS $NETWORK_JSON | jq -r ".\"$NETWORK\".binary | .[] | select(.version==\"$CM_DESIRED_VERSION\").linux.link") -o cronosd.tar.gz
+    curl -LJ $(curl -sS $NETWORK_JSON | jq -r ".\"$NETWORK\".binary | .[] | select(.version==\"$CM_DESIRED_VERSION\").linux.link") -o $CM_DIR/cronosd.tar.gz
     CHECKSUM=$(curl -sS $NETWORK_JSON | jq -r ".\"$NETWORK\".binary | .[] | select(.version==\"$CM_DESIRED_VERSION\").linux.checksum")
     echo "downloaded $CHECKSUM"
-    if (! echo "$CHECKSUM cronosd.tar.gz" | sha256sum -c --status --quiet - > /dev/null 2>&1) ; then
+    if (! echo "$CHECKSUM $CM_DIR/cronosd.tar.gz" | sha256sum -c --status --quiet - > /dev/null 2>&1) ; then
         echo_s "The checksum does not match the target downloaded file! Something wrong from download source, please try again or create an issue for it."
         exit 1
     fi
-    tar -xzf cronosd.tar.gz
+    tar -xzf $CM_DIR/cronosd.tar.gz
 }
 InitChain()
 {
