@@ -20,14 +20,27 @@ download_binary()
     fi
     tar -xzf cronosd.tar.gz
 }
-DaemonReloadFunction()
+InitChain()
+{
+    # Config .cronos/config/config.toml
+    echo_s "Replace moniker in $CM_CONFIG"
+    echo_s "Moniker is display name for tendermint p2p\n"
+    read -p 'moniker: ' MONIKER
+
+    if [[ -n "$MONIKER" ]] ; then
+        $CM_BINARY init $MONIKER --chain-id $NETWORK --home $CM_HOME
+        SEEDS=$(curl -sS $NETWORK_JSON | jq -r ".\"$NETWORK\".seeds")
+        sed -i "s/^\(seeds\s*=\s*\).*\$/\1\"$SEEDS\"/" $CM_CONFIG
+    else
+        echo_s "moniker is not set. Try again!\n"
+    fi
+}
+StartService()
 {
     sudo systemctl daemon-reload
-}
-EnableFunction()
-{
-    DaemonReloadFunction
     sudo systemctl enable cronosd.service
+    sudo systemctl restart cronosd.service
+    sudo systemctl restart rsyslog
 }
 StopService()
 {
@@ -88,13 +101,6 @@ checkout_network()
             fi
             NETWORK=${arr[index]}
             echo_s "The selected network is $NETWORK"
-            GENESIS_TARGET_SHA256=$(curl -sS $NETWORK_JSON | jq -r ".\"$NETWORK\".genesis_sha256sum")
-            if [[ ! -f "$CM_GENESIS" ]] || (! echo "$GENESIS_TARGET_SHA256 $CM_GENESIS" | sha256sum -c --status --quiet - > /dev/null 2>&1) ; then
-                echo_s "The genesis does not exist or the sha256sum does not match the target one. Download the target genesis from github."
-                download_genesis
-            fi
-            SEEDS=$(curl -sS $NETWORK_JSON | jq -r ".\"$NETWORK\".seeds")
-            sed -i "s/^\(seeds\s*=\s*\).*\$/\1\"$SEEDS\"/" $CM_CONFIG
             read -p "Do you want to enable state-sync? (Y/N): " yn
             case $yn in
                 [Yy]* ) 
@@ -114,6 +120,20 @@ checkout_network()
                 echo_s "The binary does not exist or the version does not match the target version. Download the target version binary from github release."
                 download_binary
             fi
+            read -p "Do you want to initalize the chain. Select N if you have already initialized? (Y/N): " yn
+            case $yn in
+                [Yy]* ) 
+                    InitChain
+                ;;
+                * ) 
+                    echo_s "Continue assuming you have ran ./cronosd init by yourself"
+                ;;
+            esac
+            GENESIS_TARGET_SHA256=$(curl -sS $NETWORK_JSON | jq -r ".\"$NETWORK\".genesis_sha256sum")
+            if [[ ! -f "$CM_GENESIS" ]] || (! echo "$GENESIS_TARGET_SHA256 $CM_GENESIS" | sha256sum -c --status --quiet - > /dev/null 2>&1) ; then
+                echo_s "The genesis does not exist or the sha256sum does not match the target one. Download the target genesis from github."
+                download_genesis
+            fi
         ;;
         *)
             echo_s "No match"
@@ -126,11 +146,14 @@ echo_s()
     echo -e $1
 }
 
-if ! [ -x "$(command -v jq)" ]; then
-    echo 'jq not installed! Installing jq' >&2
-    sudo apt update
-    sudo apt install jq -y
-fi
+require_jq()
+{
+    if ! [ -x "$(command -v jq)" ]; then
+            echo 'jq not installed! Installing jq' >&2
+            sudo apt update
+            sudo apt install jq -y
+    fi
+}
 
 
 # Select network
@@ -141,6 +164,8 @@ CM_CONFIG="$CM_HOME/config/config.toml"
 CM_DIR="/chain/"
 CM_BINARY="/chain/bin/cronosd"
 CM_GENESIS="$CM_HOME/config/genesis.json"
+
+require_jq
 checkout_network
 
 # Remove old data
@@ -150,48 +175,21 @@ if [[ -d "$CM_HOME/data" ]]; then
     case $yn in
         [Yy]* ) 
             StopService;
-            if [[ $(echo "${CM_DESIRED_VERSION:1}\n0.6.12"|sort -V|head -1) != "${CM_DESIRED_VERSION:1}" ]]; then
-                $CM_BINARY tendermint unsafe-reset-all --home $CM_HOME
-                $CM_BINARY tendermint reset-state --home $CM_HOME
-            else 
-                $CM_BINARY unsafe-reset-all --home $CM_HOME
-            fi;;
-        * ) echo_s "Not delete and exit\n"; exit 0;;
+            rm -rf $CM_HOME/
+        * ) echo_s "Not delete and exit\n";;
     esac
 fi
 
-# Config .cronos/config/config.toml
-echo_s "Replace moniker in $CM_CONFIG"
-echo_s "Moniker is display name for tendermint p2p\n"
-while true
-do
-    read -p 'moniker: ' MONIKER
-
-    if [[ -n "$MONIKER" ]] ; then
-        sed -i "s/^\(moniker\s*=\s*\).*\$/\1\"$MONIKER\"/" $CM_CONFIG
-        DENOM=$(curl -sS $NETWORK_JSON | jq -r ".\"$NETWORK\".denom")
-        sed -i "s/^\(\s*\[\"chain_id\",\s*\).*\$/\1\"$NETWORK\"],/" $CM_HOME/config/app.toml
-        sed -i "s/^\(minimum-gas-prices\s*=\s*\"[0-9]\+\.[0-9]\+\).*\$/\1$DENOM\"/" $CM_HOME/config/app.toml
-
-        read -p "Do you want to add the public IP of this node for p2p gossip? (Y/N): " yn
-        case $yn in
-            [Yy]* ) AllowGossip;;
-            * )
-                echo_s "WIll keep 'external_address value' empty\n";
-                sed -i "s/^\(external_address\s*=\s*\).*\$/\1\"\"/" $CM_CONFIG;;
-        esac
-        break
-    else
-        echo_s "moniker is not set. Try again!\n"
-    fi
-
-done
+read -p "Do you want to add the public IP of this node for p2p gossip? (Y/N): " yn
+case $yn in
+    [Yy]* ) AllowGossip;;
+    * )
+        echo_s "WIll keep 'external_address value' empty\n";
+        sed -i "s/^\(external_address\s*=\s*\).*\$/\1\"\"/" $CM_CONFIG;;
+esac
 
 # Restart service
 echo_s "👏🏻 Restarting cronosd service\n"
 # Enable systemd service for cronosd
-EnableFunction
-sudo systemctl restart cronosd.service
-sudo systemctl restart rsyslog
-
+StartService
 echo_s "👀 View the log by \"\033[32mjournalctl -u cronosd.service -f\033[0m\" or find in /chain/log/cronosd/cronosd.log"
