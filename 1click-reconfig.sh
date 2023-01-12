@@ -21,7 +21,7 @@ download_binary()
     fi
     tar -xzf $TEMP_DIR/cronosd.tar.gz -C $TEMP_DIR
     echo_s "moving from temp dir $TEMP_DIR to target dir $CM_BINARY"
-    mv $TEMP_DIR/ $CM_DIR
+    mv $TEMP_DIR/* $CM_DIR
     rm -rf $TEMP_DIR    
 }
 DaemonReloadFunction()
@@ -102,12 +102,13 @@ checkout_network()
             read -p "Do you want to enable state-sync? (Y/N): " yn
             case $yn in
                 [Yy]* ) 
-                    echo_s "State-sync require the latest version of binary to state-sync from the latest block."
+                    echo_s "State-sync requires the latest version of binary to state-sync from the latest block."
+                    echo_s "Be aware that the latest binary might contain extra dependencies!"
                     EnableStateSync
                     CM_DESIRED_VERSION=$(curl -sS $NETWORK_JSON | jq -r ".\"$NETWORK\".latest_version")
                 ;;
                 * ) 
-                    echo_s "Normal-sync require the preceding version of binary to sync from scratch."
+                    echo_s "Normal-sync requires the preceding version of binary to sync from scratch."
                     DisableStateSync
                     CM_DESIRED_VERSION=$(curl -sS $NETWORK_JSON | jq -r ".\"$NETWORK\".binary | .[-1].version")
                 ;;
