@@ -96,7 +96,8 @@ clearDataAndBinary()
             [Yy]* ) 
                 StopService;
                 rm -rf $CM_HOME/ 
-                rm -rf $CM_BINARY $CM_DIR/cronosd.tar.gz $CM_DIR/exe $CM_DIR/lib;;
+                rm -rf $CM_BINARY $CM_DIR/cronosd.tar.gz $CM_DIR/exe $CM_DIR/lib
+                rm -rf $CM_DIR/README.md $CM_DIR/LICENSE $CM_DIR/CHANGELOG.md;;
             * ) echo_s "Not delete and exit\n";;
         esac
     fi
@@ -195,7 +196,7 @@ require_jq()
 # Select network
 NETWORK_URL="https://raw.githubusercontent.com/crypto-org-chain/cronos-testnets/fix/update-1click-reconfig-script"
 NETWORK_JSON="$NETWORK_URL/testnet.json"
-CM_DIR="/chain/"
+CM_DIR="/chain"
 CM_HOME="/chain/.cronos"
 CM_BINARY="/chain/bin/cronosd"
 CM_CONFIG="$CM_HOME/config/config.toml"
