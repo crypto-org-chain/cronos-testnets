@@ -21,8 +21,7 @@ download_binary()
     fi
     tar -xzf $TEMP_DIR/cronosd.tar.gz -C $TEMP_DIR
     echo_s "moving from temp dir $TEMP_DIR to target dir $CM_BINARY"
-    mv $TEMP_DIR/**/cronosd $CM_BINARY
-    mv $TEMP_DIR/ $CM_DIR
+    cp -rlf $TEMP_DIR/ $CM_DIR
     rm -rf $TEMP_DIR    
 }
 DaemonReloadFunction()
