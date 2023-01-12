@@ -109,7 +109,7 @@ checkout_network()
                 * ) 
                     echo_s "Normal-sync require the preceding version of binary to sync from scratch."
                     DisableStateSync
-                    CM_DESIRED_VERSION=$(curl -sS $NETWORK_JSON | jq -r ".\"$NETWORK\".binary | .[-2].version")
+                    CM_DESIRED_VERSION=$(curl -sS $NETWORK_JSON | jq -r ".\"$NETWORK\".binary | .[-1].version")
                 ;;
             esac
             echo_s "The current binary version: $CM_DESIRED_VERSION"
@@ -153,7 +153,7 @@ if [[ -d "$CM_HOME/data" ]]; then
     case $yn in
         [Yy]* ) 
             StopService;
-            if [[ $(echo "${CM_DESIRED_VERSION:1}\n0.6.12"|sort|head -1) != "${CM_DESIRED_VERSION:1}" ]]; then
+            if [[ $(echo "${CM_DESIRED_VERSION:1}\n0.6.12"|sort -V|head -1) != "${CM_DESIRED_VERSION:1}" ]]; then
                 $CM_BINARY tendermint unsafe-reset-all --home $CM_HOME
                 $CM_BINARY tendermint reset-state --home $CM_HOME
             else 
