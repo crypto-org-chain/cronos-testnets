@@ -5,7 +5,7 @@ This repo collects the genesis and configuration files for the Cronos testnets.
 ## Getting Started
 
 To get started with the latest testnet, see the [docs](https://docs.cronos.org/getting-started).
-To run the `1click-reconfig.sh` make sure to get a working AMI from the marketplace.
+To run the `reconfig.sh` make sure to get the Cronos AMI on the marketplace.
 
 - Switch to user crypto `sudo su crypto`
 - Make sure to have the `cronosd.service` setup under `/lib/systemd/system/cronosd.service` 
