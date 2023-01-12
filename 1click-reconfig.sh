@@ -90,17 +90,15 @@ clearDataAndBinary()
 {
     #Remove old dataand binary
     echo_s "Reset cronosd and remove data if any"
-    if [[ -d "$CM_HOME/data" ]]; then
-        read -p '❗️ Enter (Y/N) to confirm to delete any old data: ' yn
-        case $yn in
-            [Yy]* ) 
-                StopService;
-                rm -rf $CM_HOME/ 
-                rm -rf $CM_BINARY $CM_DIR/cronosd.tar.gz $CM_DIR/exe $CM_DIR/lib
-                rm -rf $CM_DIR/README.md $CM_DIR/LICENSE $CM_DIR/CHANGELOG.md;;
-            * ) echo_s "Not delete and exit\n";;
-        esac
-    fi
+    read -p '❗️ Enter (Y/N) to confirm to delete any old data: ' yn
+    case $yn in
+        [Yy]* ) 
+            StopService;
+            rm -rf $CM_HOME/ 
+            rm -rf $CM_BINARY $CM_DIR/cronosd.tar.gz $CM_DIR/exe $CM_DIR/lib
+            rm -rf $CM_DIR/README.md $CM_DIR/LICENSE $CM_DIR/CHANGELOG.md;;
+        * ) echo_s "Not delete and exit\n";;
+    esac
 }
 shareIP()
 {

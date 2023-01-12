@@ -9,7 +9,7 @@ To run the `1click-reconfig.sh` make sure to get a working AMI from the marketpl
 
 - Switch to user crypto `sudo su crypto`
 - Make sure to have the `cronosd.service` setup under `/lib/systemd/system/cronosd.service` 
-- run `./chain/reconfig.sh` from root directory `/`
+- run `/chain/reconfig.sh` from root directory `/`
 - Follow the instructions in the script
 - To check the status of the service `systemctl status cronosd.service` and monitor logs `journalctl -u cronosd.service -f`
 - To stop the service `systemctl stop cronosd.service`
