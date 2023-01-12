@@ -175,7 +175,7 @@ if [[ -d "$CM_HOME/data" ]]; then
     case $yn in
         [Yy]* ) 
             StopService;
-            rm -rf $CM_HOME/
+            rm -rf $CM_HOME/;;
         * ) echo_s "Not delete and exit\n";;
     esac
 fi
