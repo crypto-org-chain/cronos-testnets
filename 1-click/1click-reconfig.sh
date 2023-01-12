@@ -96,8 +96,10 @@ clearDataAndBinary()
             StopService;
             rm -rf $CM_HOME/ 
             rm -rf $CM_BINARY $CM_DIR/cronosd.tar.gz $CM_DIR/exe $CM_DIR/lib
-            rm -rf $CM_DIR/README.md $CM_DIR/LICENSE $CM_DIR/CHANGELOG.md;;
-        * ) echo_s "Not delete and exit\n";;
+            rm -rf $CM_DIR/README.md $CM_DIR/LICENSE $CM_DIR/CHANGELOG.md
+            sleep 1
+            echo_s "Deletion completed";;
+        * ) echo_s "continue without deleting\n";;
     esac
 }
 shareIP()
