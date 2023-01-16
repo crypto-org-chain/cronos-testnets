@@ -5,20 +5,20 @@ set -e
 download_genesis()
 {
     echo_s "💾 Downloading $NETWORK genesis"
-    curl -sS $NETWORK_URL/$NETWORK/genesis.json -o $CM_GENESIS
+    sudo curl -LJ $NETWORK_URL/$NETWORK/genesis.json -o $CM_GENESIS
 }
 shopt -s globstar
 download_binary()
 {
     echo_s "💾 Downloading $CM_DESIRED_VERSION binary"
-    curl -LJ $(curl -sS $NETWORK_JSON | jq -r ".\"$NETWORK\".binary | .[] | select(.version==\"$CM_DESIRED_VERSION\").linux.link") -o $CM_DIR/cronosd.tar.gz
+    sudo curl -LJ $(curl -sS $NETWORK_JSON | jq -r ".\"$NETWORK\".binary | .[] | select(.version==\"$CM_DESIRED_VERSION\").linux.link") -o $CM_DIR/cronosd.tar.gz
     CHECKSUM=$(curl -sS $NETWORK_JSON | jq -r ".\"$NETWORK\".binary | .[] | select(.version==\"$CM_DESIRED_VERSION\").linux.checksum")
     echo "downloaded $CHECKSUM"
     if (! echo "$CHECKSUM $CM_DIR/cronosd.tar.gz" | sha256sum -c --status --quiet - > /dev/null 2>&1) ; then
         echo_s "The checksum does not match the target downloaded file! Something wrong from download source, please try again or create an issue for it."
         exit 1
     fi
-    tar -xzf $CM_DIR/cronosd.tar.gz
+    sudo tar -xzf $CM_DIR/cronosd.tar.gz -C $CM_DIR
 }
 InitChain()
 {
@@ -28,7 +28,8 @@ InitChain()
     read -p 'moniker: ' MONIKER
 
     if [[ -n "$MONIKER" ]] ; then
-        $CM_BINARY init $MONIKER --chain-id $NETWORK --home $CM_HOME
+        sudo $CM_BINARY init $MONIKER --chain-id $NETWORK --home $CM_HOME
+        sudo chown -R crypto:crypto $CM_HOME
         PERSISTENT_PEERS=$(curl -sS $NETWORK_JSON | jq -r ".\"$NETWORK\".seeds")
         sed -i "s/^\(persistent_peers\s*=\s*\).*\$/\1\"$PERSISTENT_PEERS\"/" $CM_CONFIG
     else
@@ -94,10 +95,10 @@ clearDataAndBinary()
     case $yn in
         [Yy]* ) 
             StopService;
-            rm -rf $CM_HOME/ 
-            rm -rf $CM_BINARY $CM_DIR/cronosd.tar.gz $CM_DIR/exe $CM_DIR/lib
-            rm -rf $CM_DIR/README.md $CM_DIR/LICENSE $CM_DIR/CHANGELOG.md
-            sleep 1
+            sudo rm -rf $CM_HOME/ 
+            sudo rm -rf $CM_BINARY $CM_DIR/cronosd.tar.gz $CM_DIR/exe $CM_DIR/lib
+            sudo rm -rf $CM_DIR/README.md $CM_DIR/LICENSE $CM_DIR/CHANGELOG.md
+            sleep 3
             echo_s "Deletion completed";;
         * ) echo_s "continue without deleting\n";;
     esac
@@ -194,7 +195,7 @@ require_jq()
 
 
 # Select network
-NETWORK_URL="https://raw.githubusercontent.com/crypto-org-chain/cronos-testnets/main"
+NETWORK_URL="https://raw.githubusercontent.com/crypto-org-chain/cronos-testnets/fix/update-1click-reconfig-script"
 NETWORK_JSON="$NETWORK_URL/testnet.json"
 CM_DIR="/chain"
 CM_HOME="/chain/.cronos"
