@@ -1,7 +1,22 @@
 {
   "cronostestnet_338-3": {
-    "latest_version": "v0.7.0-rc3",
+    "latest_version": "v1.0.0-rc4",
     "binary": [
+      {
+        "linux": {
+          "link": "https://github.com/crypto-org-chain/cronos/releases/download/v1.0.0-rc4/cronos_1.0.0-rc4-testnet_Linux_x86_64.tar.gz",
+          "checksum": "2daf6fadc6dbcc9508e232611817b9377d94a2962a76f3821386c0c7255036b4"
+        },
+        "osx": {
+          "link": "https://github.com/crypto-org-chain/cronos/releases/download/v1.0.0-rc4/cronos_1.0.0-rc4-testnet_Darwin_x86_64.tar.gz",
+          "checksum": "39f63c98ccd6f6f1d4bc392c0baeb7aab916c0d002348c212b5f34b3d58b865f"
+        },
+        "windows": {
+          "link": "https://github.com/crypto-org-chain/cronos/releases/download/v1.0.0-rc4/cronos_1.0.0-rc4-testnet_Windows_x86_64.tar.gz",
+          "checksum": "10a962714567ca0aa25e8061512dcc04708649db21131e651339dabafb98a556"
+        },
+        "version": "v1.0.0-rc4"
+      },
       {
         "linux": {
           "link": "https://github.com/crypto-org-chain/cronos/releases/download/v0.7.0-rc3/cronos_0.7.0-rc3-testnet_Linux_x86_64.tar.gz",
@@ -49,6 +64,21 @@
       },
       {
         "linux": {
+          "link": "https://github.com/crypto-org-chain/cronos/releases/download/v0.6.5/cronos_0.6.5-testnet_Linux_x86_64.tar.gz",
+          "checksum": "1ec7dd6864250b8e02841b47f49536cf7931a59afc5f35dabf797a2a842a2015"
+        },
+        "osx": {
+          "link": "https://github.com/crypto-org-chain/cronos/releases/download/v0.6.5/cronos_0.6.5-testnet_Darwin_x86_64.tar.gz",
+          "checksum": "693549df3deb1371f98e63d8aa62d22a16a7dc1119eaba150b2a9073554ff63f"
+        },
+        "windows": {
+          "link": "https://github.com/crypto-org-chain/cronos/releases/download/v0.6.5/cronos_0.6.5-testnet_Windows_x86_64.zip",
+          "checksum": "92884d5f50d42dce2ade9b8a62da7689882b5ad4af37634b51d56d8e776cd3dc"
+        },
+        "version": "v0.6.5"
+      },
+      {
+        "linux": {
           "link": "https://github.com/crypto-org-chain/cronos/releases/download/v0.6.0-testnet/cronos_0.6.0-testnet_Linux_x86_64.tar.gz",
           "checksum": "84320d4fcf7a40bca73bf3c5fbe818d967cb80e15d3495922dd720950d4ff5cc"
         },
@@ -66,10 +96,10 @@
     "seeds": " 8fcba3485c67a2a00a383b6f45660a4ac529c6ca@52.77.30.18:26656,e65199bc579ffd89d7c021c5611f9f1c97f7ff13@54.251.209.254:26656,b8e6d6e16d236fa6a7101316d96de718200c500c@bd-cronos-testnet-seed-node-01.bdnodes.net:26656",
     "persistent_peers": " 8fcba3485c67a2a00a383b6f45660a4ac529c6ca@52.77.30.18:26656,e65199bc579ffd89d7c021c5611f9f1c97f7ff13@54.251.209.254:26656,b8e6d6e16d236fa6a7101316d96de718200c500c@bd-cronos-testnet-seed-node-01.bdnodes.net:26656",
     "endpoint": {
-      "tendermint-rpc": "https://cronos-testnet-3.crypto.org:26657",
-      "lcd": "https://cronos-testnet-3.crypto.org:1317",
-      "grpc": "https://cronos-testnet-3.crypto.org:9090",
-      "evm-rpc": "https://cronos-testnet-3.crypto.org:8545"
+      "rpc": "https://rpc-t3.cronos.org:443",
+      "restful": "https://rest-t3.cronos.org/",
+      "grpc": "https://grpc-t3.cronos.org/",
+      "evm_jsonrpc": "https://evm-t3.cronos.org/"
     },
     "genesis_sha256sum": "7d898ad75b3e2e1fa182d928ca10a284c1dd252e12d17ad6dab76551b29d1a59",
     "denom": "basetcro"

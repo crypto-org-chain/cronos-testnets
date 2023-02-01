@@ -5,6 +5,13 @@ This repo collects the genesis and configuration files for the Cronos testnets.
 ## Getting Started
 
 To get started with the latest testnet, see the [docs](https://docs.cronos.org/getting-started).
+To run the `reconfig.sh` make sure to get the Cronos AMI on the marketplace.
+
+- Make sure to have the `cronosd.service` setup under `/lib/systemd/system/cronosd.service` 
+- run `sudo -u crypto /chain/reconfig.sh` from root directory `/`
+- Follow the instructions in the script
+- To check the status of the service `systemctl status cronosd.service` and monitor logs `journalctl -u cronosd.service -f`
+- To stop the service `systemctl stop cronosd.service`
 
 ## Testnet Status
 - Sep 14, 2022_ - `cronostestnet_338-3`
